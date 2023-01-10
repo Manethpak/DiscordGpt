@@ -24,11 +24,17 @@ EXTRAS_LINE = [
 
 @client.event
 async def on_ready():
+    """
+    Print a log when the bot is ready
+    """
     print(f"We have logged in as {client.user}")
 
 
 @client.event
 async def on_message(message: Message):
+    """
+    Listen to message event
+    """
     # ignore messages from the bot itself
     if message.author == client.user:
         return
