@@ -10,6 +10,7 @@ PREFIX = ">>"
 
 COMMANDS = {
     "ask": ">>ask",
+    "ping": ">>ping",
     "private": ">>private",
     "help": ">>help",
 }
@@ -40,16 +41,16 @@ async def on_message(message: Message):
     if not message.content.startswith(PREFIX):
         return
 
-    if message.content.startswith(PREFIX + "ask"):
+    if message.content.startswith(COMMANDS["ask"]):
         await chat(message)
 
-    elif message.content.startswith(PREFIX + "ping"):
+    elif message.content.startswith(COMMANDS["ping"]):
         await message.channel.send("pong!")
 
-    elif message.content.startswith(PREFIX + "private"):
+    elif message.content.startswith(COMMANDS["private"]):
         await message.author.send("What sup? How can I help you today?")
 
-    elif message.content.startswith(PREFIX + "help"):
+    elif message.content.startswith(COMMANDS["help"]):
         await message.channel.send(
             """I can help you answering your question. Just type the following command
             >>ask <text> - to ask me a question
