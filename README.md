@@ -2,6 +2,10 @@
 
 DiscordGpt bot is a discord bot that uses OpenAI's GPT-3 API to generate responses to user questions. Feel free to contribute to this repo to improve the bot! Would love your contribution.
 
+## Demo
+
+Want to try the demo? [Invite](https://discord.com/api/oauth2/authorize?client_id=1061733298612736072&permissions=274877913088&scope=bot) the bot to your server and test it out!
+
 ## Installation
 
 1. Clone the repository
