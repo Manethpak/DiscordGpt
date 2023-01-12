@@ -1,6 +1,6 @@
-# DC-GPT3
+# DiscordGpt
 
-DC-GPT3 bot is a discord bot that uses OpenAI's GPT-3 API to generate responses to user questions.
+DiscordGpt bot is a discord bot that uses OpenAI's GPT-3 API to generate responses to user questions.
 
 ## Installation
 
