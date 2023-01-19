@@ -48,6 +48,9 @@ async def on_message(message: Message):
         return
 
     if message.content.startswith(COMMANDS["ask"]):
+        print(
+            f'{message.author} asked: "{message.content}" in {message.guild}:{message.channel}'
+        )
         await chat(message)
 
     elif message.content.startswith(COMMANDS["ping"]):
@@ -91,4 +94,15 @@ async def chat(message: Message):
     # Extract the response from the API response
     response_text = response["choices"][0]["text"]
 
-    await message.channel.send(response_text)
+    # if the response is too long, truncate it into 2000 characters of length each
+    responses = []
+    if len(response_text) > 2000:
+        responses = [
+            response_text[i : i + 2000] for i in range(0, len(response_text), 2000)
+        ]
+
+    try:
+        for response in responses:
+            await message.channel.send(response)
+    except:
+        await message.channel.send("Something went wrong. Please try again later.")
