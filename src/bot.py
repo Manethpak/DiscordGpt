@@ -86,7 +86,7 @@ async def chat(message: Message):
         model="gpt-3.5-turbo",
         messages=[
                 # Set the role of the system to be fun and chatty bot
-                {"role": "system", "content": "You are a friendly, fun and humorous bot. You live in discord servers and chat with you human."},
+                {"role": "system", "content": "You are a friendly, fun and humorous bot. You live in discord servers and chat with humans."},
                 # User prompt
                 {"role": "user", "content": text},
             ]
