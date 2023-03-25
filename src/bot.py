@@ -1,5 +1,5 @@
 from discord import Intents, Client, Message
-from openai import Completion
+from openai import ChatCompletion
 
 intents = Intents.default()
 intents.message_content = True
@@ -81,25 +81,28 @@ async def chat(message: Message):
         await message.channel.send("Please provide a question using the >>ask command")
         return
 
-    # get reponse from openai's text-davinci-003
-    response = Completion.create(
-        engine="text-davinci-003",
-        prompt=text,
-        temperature=0.8,
-        max_tokens=512,
-        top_p=1,
-        logprobs=10,
+    # get reponse from openai's gpt-3.5-turbo model
+    response = ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+                # Set the role of the system to be fun and chatty bot
+                {"role": "system", "content": "You are a friendly, fun and humorous bot. You live in discord servers and chat with you human."},
+                # User prompt
+                {"role": "user", "content": text},
+            ]
     )
 
     # Extract the response from the API response
-    response_text = response["choices"][0]["text"]
+    response_text = response['choices'][0]['message']['content']
 
-    # if the response is too long, truncate it into 2000 characters of length each
+    # if the response is too long, truncate it into 2000 characters of length each and append it to a list of responses to send to the user in multiple messages, discord only allows 2000 characters per message
     responses = []
-    if len(response_text) > 2000:
-        responses = [
+    if len(response_text) > 2000: # if the response text is too long
+        responses = [ # split the response_text into 2000 character chunks
             response_text[i : i + 2000] for i in range(0, len(response_text), 2000)
         ]
+    else: # if not too long just append the full response_text
+        responses.append(response_text)
 
     try:
         for response in responses:
